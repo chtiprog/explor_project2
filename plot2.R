@@ -15,12 +15,13 @@ maryland_data <- NEI[NEI$fips == "24510", ]
 library(dplyr)
 maryland_data <- tbl_df(maryland_data)
 
-
+# Grouping and filtring
 by_year <- group_by(maryland_data, year)
 emission_sum <- summarize(by_year, total_emissions = sum(Emissions))
 year <- select(emission_sum, year)
 total_emissions <- select(emission_sum, total_emissions)
 
+# Plotting
 png("plot2.png", width = 480, height = 480, units = "px")
-plot(data.frame(year, total_emissions), type = "l", ylab = "total PM2.5 emission")
+plot(data.frame(year, total_emissions), type = "l", ylab = "total PM2.5 emission", main = "total emissions from PM2.5 in Baltimore from 1999-2008")
 dev.off()

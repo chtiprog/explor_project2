@@ -35,10 +35,11 @@ point <- filter(baltimore, type == "POINT")
 point <- group_by(point, year)
 point <- summarize(point, total_emission = sum(Emissions))
 
-# plotting the graph with these 3 data :
-png("plot3.png", width = 480, height = 480, units = "px")
-plot(data.frame(select(nonpoint, year), select(nonpoint, total_emission)), type = "l", ylab = "PM2.5 emission", col = "green")
-lines(data.frame(select(non_road, year), select(non_road, total_emission)), type = "l", col = "red")
+library(ggplot2)
+# plotting the graph with these 4 data :
+png("plot3.png")
+plot(data.frame(select(non_road, year), select(non_road, total_emission)), type = "l", ylab = "PM2.5 emission", col = "green")
+lines(data.frame(select(nonpoint, year), select(nonpoint, total_emission)), type = "l", col = "red")
 lines(data.frame(select(on_road, year), select(on_road, total_emission)), type = "l", col = "blue")
 lines(data.frame(select(point, year), select(point, total_emission)), type = "l")
 legend("topright", 
@@ -52,4 +53,4 @@ legend("topright",
 )
 dev.off()
 
-library(ggplot2)
+
